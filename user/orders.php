@@ -68,21 +68,21 @@ require_once '../includes/header.php';
             }
             ?>
             <div class="col-12 mb-4">
-                <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+                <div class="glass-container p-0 overflow-hidden shadow-sm">
                     <!-- Order Header -->
-                    <div class="card-header bg-white py-3 px-4 d-flex flex-wrap justify-content-between align-items-center border-bottom">
+                    <div class="py-3 px-4 d-flex flex-wrap justify-content-between align-items-center border-bottom bg-white bg-opacity-50">
                         <div class="d-flex align-items-center gap-3 flex-wrap">
                             <div>
-                                <span class="text-muted small uppercase fw-semibold">Order ID</span>
+                                <span class="text-muted small uppercase fw-bold" style="font-size: 0.7rem;">Order ID</span>
                                 <p class="mb-0 fw-bold text-dark">#LC-<?php echo str_pad($order['id'], 6, '0', STR_PAD_LEFT); ?></p>
                             </div>
                             <div class="border-start ps-3 d-none d-sm-block">
-                                <span class="text-muted small uppercase fw-semibold">Date Placed</span>
+                                <span class="text-muted small uppercase fw-bold" style="font-size: 0.7rem;">Date Placed</span>
                                 <p class="mb-0 text-dark"><?php echo date('M d, Y h:i A', strtotime($order['created_at'])); ?></p>
                             </div>
                             <div class="border-start ps-3">
-                                <span class="text-muted small uppercase fw-semibold">Shipping To</span>
-                                <p class="mb-0 text-dark text-truncate" style="max-width: 200px;"><?php echo sanitize($order['shipping_address']); ?></p>
+                                <span class="text-muted small uppercase fw-bold" style="font-size: 0.7rem;">Shipping To</span>
+                                <p class="mb-0 text-dark text-truncate" style="max-width: 250px;"><?php echo sanitize($order['shipping_address']); ?></p>
                             </div>
                         </div>
                         <div class="d-flex align-items-center gap-2">
@@ -100,10 +100,10 @@ require_once '../includes/header.php';
                     </div>
 
                     <!-- Order Items -->
-                    <div class="card-body p-0">
+                    <div class="p-0">
                         <div class="table-responsive">
                             <table class="table table-hover align-middle mb-0">
-                                <thead class="table-light">
+                                <thead class="table-light bg-opacity-50">
                                     <tr>
                                         <th scope="col" class="ps-4">Product</th>
                                         <th scope="col" class="text-center">Quantity</th>
@@ -142,7 +142,7 @@ require_once '../includes/header.php';
                     </div>
 
                     <!-- Order Footer -->
-                    <div class="card-footer bg-light py-3 px-4 d-flex justify-content-between align-items-center">
+                    <div class="py-3 px-4 d-flex justify-content-between align-items-center bg-white bg-opacity-50 border-top">
                         <span class="text-muted">Contact: <strong><?php echo sanitize($order['contact_number']); ?></strong></span>
                         <h5 class="mb-0 fw-extrabold text-primary">
                             Total: $<?php echo number_format($order['total_price'], 2); ?>

@@ -108,11 +108,11 @@ require_once 'includes/header.php';
 <?php endif; ?>
 
 <!-- Product Detail Display -->
-<div class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white p-4 p-md-5">
+<div class="glass-container p-4 p-md-5">
     <div class="row g-5">
         <!-- Product Image -->
         <div class="col-md-6">
-            <div class="rounded-4 overflow-hidden border bg-light position-relative" style="padding-top: 100%;">
+            <div class="rounded-4 overflow-hidden border bg-light position-relative shadow-sm" style="padding-top: 100%;">
                 <?php if (!empty($product['image'])): ?>
                     <img src="assets/images/<?php echo sanitize($product['image']); ?>" alt="<?php echo sanitize($product['name']); ?>" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" onerror="this.src='https://placehold.co/600x600?text=No+Image';">
                 <?php else: ?>
@@ -123,23 +123,23 @@ require_once 'includes/header.php';
 
         <!-- Product Specs & Purchase controls -->
         <div class="col-md-6 d-flex flex-column justify-content-center">
-            <span class="badge bg-indigo-subtle text-primary align-self-start mb-2 px-3 py-2 rounded-pill fw-semibold">
+            <span class="badge bg-indigo-subtle text-primary align-self-start mb-3 px-3 py-2 rounded-pill fw-bold">
                 <?php echo sanitize($product['category_name'] ?? 'Uncategorized'); ?>
             </span>
             <h1 class="fw-extrabold mb-3 text-dark"><?php echo sanitize($product['name']); ?></h1>
             
-            <h2 class="text-primary fw-extrabold mb-4">$<?php echo number_format($product['price'], 2); ?></h2>
+            <h2 class="text-primary fw-extrabold mb-4 fs-1">$<?php echo number_format($product['price'], 2); ?></h2>
             
             <hr class="my-4 border-light">
 
-            <h5 class="fw-bold mb-2">Description</h5>
+            <h5 class="fw-bold mb-2"><i class="bi bi-file-text me-2"></i>Product Details</h5>
             <p class="text-secondary mb-4 leading-relaxed"><?php echo nl2br(sanitize($product['description'])); ?></p>
 
             <div class="mb-4 d-flex align-items-center gap-3">
                 <span class="fw-semibold text-secondary">Availability:</span>
                 <?php if ($product['stock'] > 0): ?>
                     <span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill fw-semibold">
-                        <i class="bi bi-check-circle me-1"></i> <?php echo $product['stock']; ?> Units In Stock
+                        <i class="bi bi-check2-circle me-1"></i> <?php echo $product['stock']; ?> Units In Stock
                     </span>
                 <?php else: ?>
                     <span class="badge bg-danger-subtle text-danger px-3 py-2 rounded-pill fw-semibold">
@@ -151,14 +151,14 @@ require_once 'includes/header.php';
             <?php if ($product['stock'] > 0): ?>
                 <form action="product.php?id=<?php echo $product['id']; ?>" method="POST" class="row g-3 align-items-center">
                     <div class="col-auto">
-                        <label for="quantity" class="form-label mb-0 fw-semibold text-secondary">Quantity:</label>
+                        <label for="quantity" class="form-label mb-0 fw-semibold text-secondary">Qty:</label>
                     </div>
                     <div class="col-3 col-md-2">
                         <input type="number" name="quantity" id="quantity" class="form-control form-control-custom text-center px-1" value="1" min="1" max="<?php echo $product['stock']; ?>" required>
                     </div>
                     <div class="col-auto">
-                        <button type="submit" name="add_to_cart_detail" class="btn btn-premium btn-lg px-4 border-0">
-                            <i class="bi bi-cart-plus me-2"></i> Add to Shopping Cart
+                        <button type="submit" name="add_to_cart_detail" class="btn btn-premium px-4">
+                            <i class="bi bi-cart-plus me-2"></i> Add to Cart
                         </button>
                     </div>
                 </form>

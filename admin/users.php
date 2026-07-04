@@ -26,7 +26,7 @@ try {
     </div>
 <?php endif; ?>
 
-<div class="card border-0 shadow-sm rounded-4 bg-white p-4">
+<div class="glass-container p-4 animate-fade-in">
     <h5 class="fw-bold mb-4"><i class="bi bi-people me-2 text-primary"></i>Registered Customer Accounts</h5>
 
     <?php if (empty($users)): ?>

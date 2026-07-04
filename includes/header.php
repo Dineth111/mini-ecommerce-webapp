@@ -92,4 +92,4 @@ if (isset($_SESSION['user_id']) && isset($pdo)) {
 </nav>
 
 <!-- Page Content Starts Here -->
-<div class="container py-4 flex-grow-1">
+<div class="container py-5 flex-grow-1 animate-fade-in">

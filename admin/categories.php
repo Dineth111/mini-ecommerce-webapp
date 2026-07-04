@@ -92,10 +92,10 @@ try {
     </div>
 <?php endif; ?>
 
-<div class="row g-4">
+<div class="row g-4 animate-fade-in">
     <!-- Categories List Grid Column -->
     <div class="col-md-7">
-        <div class="card border-0 shadow-sm rounded-4 bg-white p-4">
+        <div class="glass-container p-4">
             <h5 class="fw-bold mb-4"><i class="bi bi-tags me-2 text-primary"></i>Existing Categories</h5>
             
             <?php if (empty($categories)): ?>
@@ -144,7 +144,7 @@ try {
 
     <!-- Category Actions Forms Column -->
     <div class="col-md-5">
-        <div class="card border-0 shadow-sm rounded-4 bg-white p-4">
+        <div class="glass-container p-4">
             <?php if ($edit_category): ?>
                 <!-- Edit Category Form -->
                 <h5 class="fw-bold mb-4 text-indigo"><i class="bi bi-pencil-square me-2"></i>Edit Category</h5>
@@ -156,7 +156,7 @@ try {
                     </div>
                     <div class="d-flex gap-2">
                         <button type="submit" name="edit_category" class="btn btn-premium w-100 border-0">Save Changes</button>
-                        <a href="categories.php" class="btn btn-secondary btn-premium-outline w-100 border-2">Cancel</a>
+                        <a href="categories.php" class="btn btn-premium-outline w-100">Cancel</a>
                     </div>
                 </form>
             <?php else: ?>

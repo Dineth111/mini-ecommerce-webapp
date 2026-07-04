@@ -125,25 +125,25 @@ require_once 'includes/header.php';
     </div>
 <?php endif; ?>
 
-<div class="row g-4">
+<div class="row g-4 animate-fade-in">
     <!-- Shipping Address Form -->
     <div class="col-md-7">
-        <div class="card border-0 shadow-sm rounded-4 bg-white p-4">
-            <h4 class="fw-bold mb-4">Shipping Details</h4>
+        <div class="glass-container p-4">
+            <h4 class="fw-bold mb-4"><i class="bi bi-truck me-2 text-primary"></i>Shipping Details</h4>
             
             <form action="checkout.php" method="POST">
                 <!-- Shipping Address -->
                 <div class="mb-3">
-                    <label for="shipping_address" class="form-label small fw-semibold text-secondary">Complete Shipping Address</label>
+                    <label for="shipping_address" class="form-label small fw-bold text-secondary">Complete Shipping Address</label>
                     <textarea name="shipping_address" id="shipping_address" class="form-control form-control-custom" rows="4" placeholder="Enter street, apartment, city, state, postal code" required><?php echo isset($shipping_address) ? $shipping_address : ''; ?></textarea>
                 </div>
 
                 <!-- Contact Number -->
                 <div class="mb-4">
-                    <label for="contact_number" class="form-label small fw-semibold text-secondary">Contact Phone Number</label>
+                    <label for="contact_number" class="form-label small fw-bold text-secondary">Contact Phone Number</label>
                     <div class="input-group">
-                        <span class="input-group-text bg-light"><i class="bi bi-telephone text-muted"></i></span>
-                        <input type="text" name="contact_number" id="contact_number" class="form-control form-control-custom" placeholder="e.g. +1234567890" required value="<?php echo isset($contact_number) ? $contact_number : ''; ?>">
+                        <span class="input-group-text bg-light border-0"><i class="bi bi-telephone text-muted"></i></span>
+                        <input type="text" name="contact_number" id="contact_number" class="form-control form-control-custom border-start-0" placeholder="e.g. +1234567890" required value="<?php echo isset($contact_number) ? $contact_number : ''; ?>">
                     </div>
                 </div>
 
@@ -158,7 +158,7 @@ require_once 'includes/header.php';
                     </div>
                 </div>
 
-                <button type="submit" name="place_order" class="btn btn-premium btn-lg w-100 border-0">
+                <button type="submit" name="place_order" class="btn btn-premium w-100">
                     <i class="bi bi-bag-check-fill me-2"></i> Confirm and Place Order
                 </button>
             </form>
@@ -167,8 +167,8 @@ require_once 'includes/header.php';
 
     <!-- Order Review Sidebar -->
     <div class="col-md-5">
-        <div class="card border-0 shadow-sm rounded-4 bg-white p-4">
-            <h4 class="fw-bold mb-4">Review Order</h4>
+        <div class="glass-container p-4">
+            <h4 class="fw-bold mb-4"><i class="bi bi-bag-check me-2 text-primary"></i>Review Order</h4>
             
             <ul class="list-group list-group-flush mb-3">
                 <?php foreach ($cart_items as $item): ?>
@@ -188,7 +188,7 @@ require_once 'includes/header.php';
             </div>
             <div class="d-flex justify-content-between mb-2">
                 <span class="text-secondary">Shipping</span>
-                <span class="text-success fw-semibold">FREE</span>
+                <span class="text-success fw-bold">FREE</span>
             </div>
             <hr class="my-3">
             <div class="d-flex justify-content-between">

@@ -139,7 +139,7 @@ require_once 'includes/header.php';
     <div class="row g-4">
         <!-- Cart Items List (Table) -->
         <div class="col-lg-8">
-            <div class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white p-3">
+            <div class="glass-container p-4">
                 <div class="table-responsive">
                     <table class="table align-middle table-premium mb-0">
                         <thead>
@@ -163,7 +163,7 @@ require_once 'includes/header.php';
                                                 <img src="https://placehold.co/80" class="cart-item-img border" alt="<?php echo sanitize($item['name']); ?>">
                                             <?php endif; ?>
                                             <div>
-                                                <h6 class="mb-0 fw-bold"><a href="product.php?id=<?php echo $item['product_id']; ?>" class="text-dark text-decoration-none hover-indigo"><?php echo sanitize($item['name']); ?></a></h6>
+                                                <h6 class="mb-1 fw-bold"><a href="product.php?id=<?php echo $item['product_id']; ?>" class="text-dark text-decoration-none hover-indigo"><?php echo sanitize($item['name']); ?></a></h6>
                                                 <span class="text-primary fw-semibold small">$<?php echo number_format($item['price'], 2); ?></span>
                                             </div>
                                         </div>
@@ -206,16 +206,16 @@ require_once 'includes/header.php';
 
         <!-- Order Summary Side Panel -->
         <div class="col-lg-4">
-            <div class="card border-0 shadow-sm rounded-4 bg-white p-4">
-                <h4 class="fw-bold mb-4">Order Summary</h4>
+            <div class="glass-container p-4">
+                <h4 class="fw-bold mb-4"><i class="bi bi-cart-check me-2"></i>Order Summary</h4>
                 
-                <div class="d-flex justify-content-between mb-2">
+                <div class="d-flex justify-content-between mb-3">
                     <span class="text-secondary">Subtotal</span>
                     <span class="fw-bold text-dark">$<?php echo number_format($cart_total, 2); ?></span>
                 </div>
-                <div class="d-flex justify-content-between mb-2">
+                <div class="d-flex justify-content-between mb-3">
                     <span class="text-secondary">Shipping</span>
-                    <span class="text-success fw-semibold">FREE</span>
+                    <span class="text-success fw-bold">FREE</span>
                 </div>
                 <hr class="my-3">
                 <div class="d-flex justify-content-between mb-4">
@@ -223,7 +223,7 @@ require_once 'includes/header.php';
                     <span class="text-primary fw-extrabold fs-4">$<?php echo number_format($cart_total, 2); ?></span>
                 </div>
 
-                <a href="checkout.php" class="btn btn-premium btn-lg w-100 border-0">
+                <a href="checkout.php" class="btn btn-premium w-100">
                     <i class="bi bi-credit-card-2-front-fill me-2"></i> Proceed to Checkout
                 </a>
             </div>

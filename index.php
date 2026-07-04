@@ -123,19 +123,19 @@ require_once 'includes/header.php';
 <div id="shop-section" class="row mb-5">
     <!-- Filter Sidebar / Controls -->
     <div class="col-12 mb-4">
-        <div class="card border-0 shadow-sm rounded-4 p-3 bg-white">
+        <div class="glass-container p-4">
             <form action="index.php" method="GET" class="row g-3 align-items-center">
                 <!-- Search bar -->
                 <div class="col-md-5">
                     <div class="input-group">
-                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-search text-muted"></i></span>
-                        <input type="text" name="search" class="form-control form-control-custom border-start-0 bg-light" placeholder="Search products..." value="<?php echo sanitize($search); ?>">
+                        <span class="input-group-text bg-light border-end-0 border-0"><i class="bi bi-search text-muted"></i></span>
+                        <input type="text" name="search" class="form-control form-control-custom border-0 bg-light" placeholder="Search premium products..." value="<?php echo sanitize($search); ?>">
                     </div>
                 </div>
 
                 <!-- Category Dropdown Filter -->
                 <div class="col-md-4">
-                    <select name="category" class="form-select form-control-custom bg-light">
+                    <select name="category" class="form-select form-control-custom border-0 bg-light">
                         <option value="0">All Categories</option>
                         <?php foreach ($categories as $cat): ?>
                             <option value="<?php echo $cat['id']; ?>" <?php echo ($category_filter === (int)$cat['id']) ? 'selected' : ''; ?>>
@@ -149,7 +149,7 @@ require_once 'includes/header.php';
                 <div class="col-md-3 d-flex gap-2">
                     <button type="submit" class="btn btn-premium w-100"><i class="bi bi-sliders me-1"></i> Filter</button>
                     <?php if (!empty($search) || $category_filter > 0): ?>
-                        <a href="index.php" class="btn btn-outline-secondary btn-premium-outline w-100 border-2">Clear</a>
+                        <a href="index.php" class="btn btn-premium-outline border-2">Clear</a>
                     <?php endif; ?>
                 </div>
             </form>
@@ -159,21 +159,21 @@ require_once 'includes/header.php';
 
 <!-- Notifications for Add to Cart -->
 <?php if (isset($_SESSION['cart_success'])): ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm rounded-4 mb-4" role="alert">
         <i class="bi bi-check-circle-fill me-2"></i> <?php echo $_SESSION['cart_success']; unset($_SESSION['cart_success']); ?>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 <?php endif; ?>
 
 <?php if (isset($_SESSION['cart_warning'])): ?>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <div class="alert alert-warning alert-dismissible fade show border-0 shadow-sm rounded-4 mb-4" role="alert">
         <i class="bi bi-exclamation-triangle-fill me-2"></i> <?php echo $_SESSION['cart_warning']; unset($_SESSION['cart_warning']); ?>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 <?php endif; ?>
 
 <?php if (isset($_SESSION['cart_error'])): ?>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div class="alert alert-danger alert-dismissible fade show border-0 shadow-sm rounded-4 mb-4" role="alert">
         <i class="bi bi-x-circle-fill me-2"></i> <?php echo $_SESSION['cart_error']; unset($_SESSION['cart_error']); ?>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
@@ -190,7 +190,7 @@ require_once 'includes/header.php';
     <?php else: ?>
         <?php foreach ($products as $prod): ?>
             <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
-                <div class="product-card card shadow-sm">
+                <div class="product-card">
                     <div class="product-image-wrapper">
                         <!-- Category Badge -->
                         <span class="product-badge-category">
@@ -206,24 +206,24 @@ require_once 'includes/header.php';
                     </div>
                     
                     <div class="product-card-body d-flex flex-column">
-                        <span class="text-muted small mb-1 uppercase fw-semibold">
-                            Stock: <?php echo $prod['stock'] > 0 ? '<span class="text-success">' . $prod['stock'] . ' Available</span>' : '<span class="text-danger">Out of Stock</span>'; ?>
+                        <span class="small mb-2 fw-semibold">
+                            <?php echo $prod['stock'] > 0 ? '<span class="text-success"><i class="bi bi-check2-circle me-1"></i>In Stock</span>' : '<span class="text-danger"><i class="bi bi-x-circle me-1"></i>Out of Stock</span>'; ?>
                         </span>
                         <h5 class="product-card-title">
                             <a href="product.php?id=<?php echo $prod['id']; ?>">
                                 <?php echo sanitize($prod['name']); ?>
                             </a>
                         </h5>
-                        <p class="text-secondary small text-truncate mb-3"><?php echo sanitize($prod['description']); ?></p>
+                        <p class="text-secondary small mb-3" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 38px;"><?php echo sanitize($prod['description']); ?></p>
                         
-                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <div class="mt-auto d-flex justify-content-between align-items-center pt-2 border-top">
                             <span class="product-card-price">$<?php echo number_format($prod['price'], 2); ?></span>
                             
                             <?php if ($prod['stock'] > 0): ?>
                                 <form action="index.php<?php echo !empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : ''; ?>" method="POST" class="d-inline">
                                     <input type="hidden" name="product_id" value="<?php echo $prod['id']; ?>">
                                     <input type="hidden" name="quantity" value="1">
-                                    <button type="submit" name="add_to_cart" class="btn btn-sm btn-premium px-3 py-2 rounded-3 border-0">
+                                    <button type="submit" name="add_to_cart" class="btn btn-sm btn-premium px-3 py-2">
                                         <i class="bi bi-cart-plus me-1"></i> Add
                                     </button>
                                 </form>

@@ -69,14 +69,14 @@ try {
 <div class="row g-4 mb-5">
     <!-- Total Revenue -->
     <div class="col-md-6 col-lg-3">
-        <div class="card border-0 shadow-sm rounded-4 p-3 bg-white">
+        <div class="dashboard-stat-card shadow-sm">
             <div class="d-flex align-items-center gap-3">
                 <div class="p-3 rounded-3 bg-success-subtle text-success">
                     <i class="bi bi-currency-dollar fs-3"></i>
                 </div>
                 <div>
-                    <span class="text-secondary small uppercase fw-semibold">Total Revenue</span>
-                    <h3 class="mb-0 fw-extrabold text-dark">$<?php echo number_format($total_revenue, 2); ?></h3>
+                    <span class="text-secondary small uppercase fw-bold" style="font-size: 0.75rem;">Total Revenue</span>
+                    <h3 class="mb-0 fw-extrabold text-dark mt-1">$<?php echo number_format($total_revenue, 2); ?></h3>
                 </div>
             </div>
         </div>
@@ -84,14 +84,14 @@ try {
     
     <!-- Total Orders -->
     <div class="col-md-6 col-lg-3">
-        <div class="card border-0 shadow-sm rounded-4 p-3 bg-white">
+        <div class="dashboard-stat-card shadow-sm">
             <div class="d-flex align-items-center gap-3">
                 <div class="p-3 rounded-3 bg-primary-subtle text-primary">
                     <i class="bi bi-cart-check fs-3"></i>
                 </div>
                 <div>
-                    <span class="text-secondary small uppercase fw-semibold">Orders Received</span>
-                    <h3 class="mb-0 fw-extrabold text-dark"><?php echo $total_orders; ?></h3>
+                    <span class="text-secondary small uppercase fw-bold" style="font-size: 0.75rem;">Orders Received</span>
+                    <h3 class="mb-0 fw-extrabold text-dark mt-1"><?php echo $total_orders; ?></h3>
                 </div>
             </div>
         </div>
@@ -99,14 +99,14 @@ try {
     
     <!-- Registered Users -->
     <div class="col-md-6 col-lg-3">
-        <div class="card border-0 shadow-sm rounded-4 p-3 bg-white">
+        <div class="dashboard-stat-card shadow-sm">
             <div class="d-flex align-items-center gap-3">
                 <div class="p-3 rounded-3 bg-info-subtle text-info">
                     <i class="bi bi-people fs-3"></i>
                 </div>
                 <div>
-                    <span class="text-secondary small uppercase fw-semibold">Active Customers</span>
-                    <h3 class="mb-0 fw-extrabold text-dark"><?php echo $total_customers; ?></h3>
+                    <span class="text-secondary small uppercase fw-bold" style="font-size: 0.75rem;">Active Customers</span>
+                    <h3 class="mb-0 fw-extrabold text-dark mt-1"><?php echo $total_customers; ?></h3>
                 </div>
             </div>
         </div>
@@ -114,14 +114,14 @@ try {
     
     <!-- Total Products -->
     <div class="col-md-6 col-lg-3">
-        <div class="card border-0 shadow-sm rounded-4 p-3 bg-white">
+        <div class="dashboard-stat-card shadow-sm">
             <div class="d-flex align-items-center gap-3">
                 <div class="p-3 rounded-3 bg-warning-subtle text-warning">
                     <i class="bi bi-box-seam fs-3"></i>
                 </div>
                 <div>
-                    <span class="text-secondary small uppercase fw-semibold">Catalog Size</span>
-                    <h3 class="mb-0 fw-extrabold text-dark"><?php echo $total_catalog; ?></h3>
+                    <span class="text-secondary small uppercase fw-bold" style="font-size: 0.75rem;">Catalog Size</span>
+                    <h3 class="mb-0 fw-extrabold text-dark mt-1"><?php echo $total_catalog; ?></h3>
                 </div>
             </div>
         </div>
@@ -129,7 +129,7 @@ try {
 </div>
 
 <!-- Orders Listing -->
-<div class="card border-0 shadow-sm rounded-4 bg-white p-4">
+<div class="glass-container p-4">
     <h5 class="fw-bold mb-4"><i class="bi bi-receipt me-2 text-primary"></i>Customer Orders List</h5>
 
     <?php if (empty($orders)): ?>
@@ -215,8 +215,8 @@ try {
                         <!-- Expandable Row (Order Items) -->
                         <tr class="collapse bg-light" id="items-<?php echo $order['id']; ?>">
                             <td colspan="7" class="p-4">
-                                <div class="card shadow-sm border-0 rounded-3 p-3 bg-white">
-                                    <h6 class="fw-bold mb-3 text-secondary">Items ordered:</h6>
+                                <div class="glass-container p-4 bg-white bg-opacity-75">
+                                    <h6 class="fw-bold mb-3 text-secondary"><i class="bi bi-list-stars me-2"></i>Items ordered:</h6>
                                     <?php
                                     try {
                                         $stmt_it = $pdo->prepare("
@@ -233,7 +233,7 @@ try {
                                     ?>
                                     <ul class="list-group list-group-flush mb-0">
                                         <?php foreach ($order_items as $item): ?>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2 bg-transparent">
                                                 <div>
                                                     <strong class="text-dark"><?php echo sanitize($item['product_name'] ?? 'Product Removed'); ?></strong>
                                                     <span class="text-muted small ms-2">x<?php echo $item['quantity']; ?></span>

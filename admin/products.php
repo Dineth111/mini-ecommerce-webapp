@@ -182,7 +182,7 @@ try {
 
 <!-- VIEW STATE: 1. ADD PRODUCT FORM -->
 <?php if ($action === 'add'): ?>
-    <div class="card border-0 shadow-sm rounded-4 bg-white p-4">
+    <div class="glass-container p-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h5 class="fw-bold mb-0"><i class="bi bi-plus-circle-fill me-2 text-primary"></i>Add New Product</h5>
             <a href="products.php" class="btn btn-premium-outline btn-sm">Cancel</a>
@@ -229,7 +229,7 @@ try {
 
 <!-- VIEW STATE: 2. EDIT PRODUCT FORM -->
 <?php elseif ($action === 'edit' && $edit_product): ?>
-    <div class="card border-0 shadow-sm rounded-4 bg-white p-4">
+    <div class="glass-container p-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h5 class="fw-bold mb-0 text-indigo"><i class="bi bi-pencil-square me-2"></i>Edit Product: <?php echo sanitize($edit_product['name']); ?></h5>
             <a href="products.php" class="btn btn-premium-outline btn-sm">Cancel</a>
@@ -308,7 +308,7 @@ try {
     }
     ?>
 
-    <div class="card border-0 shadow-sm rounded-4 bg-white p-4">
+    <div class="glass-container p-4">
         <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
             <h5 class="fw-bold mb-0"><i class="bi bi-box-seam me-2 text-primary"></i>Product Inventory Catalog</h5>
             <a href="products.php?action=add" class="btn btn-premium border-0 btn-sm">

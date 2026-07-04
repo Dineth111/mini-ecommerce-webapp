@@ -80,7 +80,7 @@ if (!isset($_SESSION['admin_id']) && basename($_SERVER['PHP_SELF']) !== 'login.p
         </nav>
 
         <!-- Main Content Area -->
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4 animate-fade-in">
             <!-- Header for Mobile/Admin Panel navbar -->
             <header class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
                 <div class="d-flex align-items-center">
@@ -95,5 +95,5 @@ if (!isset($_SESSION['admin_id']) && basename($_SERVER['PHP_SELF']) !== 'login.p
             </header>
 <?php else: ?>
 <!-- Unauthenticated Header Wrapper (for login page) -->
-<div class="container py-5">
+<div class="container py-5 animate-fade-in">
 <?php endif; ?>
