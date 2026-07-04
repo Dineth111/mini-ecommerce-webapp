@@ -29,6 +29,13 @@ if (!isset($_SESSION['admin_id']) && basename($_SERVER['PHP_SELF']) !== 'login.p
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="<?php echo $path_to_root; ?>assets/css/style.css" rel="stylesheet">
+    <!-- Theme Manager Init -->
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
 </head>
 <body>
 
@@ -89,11 +96,51 @@ if (!isset($_SESSION['admin_id']) && basename($_SERVER['PHP_SELF']) !== 'login.p
                     </button>
                     <h2 class="h4 mb-0"><?php echo isset($page_title) ? $page_title : "Dashboard"; ?></h2>
                 </div>
-                <div class="text-secondary small">
-                    Logged in as: <strong><?php echo sanitize($_SESSION['admin_username']); ?></strong>
+                <div class="d-flex align-items-center gap-3">
+                    <!-- Theme Switcher Toggle -->
+                    <button class="btn btn-sm btn-outline-secondary border-0" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Light/Dark Mode" type="button">
+                        <i id="themeToggleIcon" class="bi bi-sun-fill" style="font-size: 1.15rem;"></i>
+                    </button>
+                    <div class="text-secondary small">
+                        Logged in as: <strong><?php echo sanitize($_SESSION['admin_username']); ?></strong>
+                    </div>
                 </div>
             </header>
 <?php else: ?>
 <!-- Unauthenticated Header Wrapper (for login page) -->
+<div class="position-absolute top-0 end-0 p-3">
+    <!-- Theme Switcher Toggle for Login -->
+    <button class="btn btn-sm btn-outline-secondary border-0" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Light/Dark Mode" type="button">
+        <i id="themeToggleIcon" class="bi bi-sun-fill" style="font-size: 1.15rem;"></i>
+    </button>
+</div>
 <div class="container py-5 animate-fade-in">
 <?php endif; ?>
+
+<script>
+function toggleTheme() {
+    const html = document.documentElement;
+    const currentTheme = html.getAttribute('data-theme') || 'dark';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon(newTheme);
+}
+
+function updateThemeIcon(theme) {
+    const icon = document.getElementById('themeToggleIcon');
+    if (icon) {
+        if (theme === 'light') {
+            icon.className = 'bi bi-moon-stars-fill';
+        } else {
+            icon.className = 'bi bi-sun-fill';
+        }
+    }
+}
+
+// Initial icon sync on load
+document.addEventListener('DOMContentLoaded', () => {
+    const theme = localStorage.getItem('theme') || 'dark';
+    updateThemeIcon(theme);
+});
+</script>

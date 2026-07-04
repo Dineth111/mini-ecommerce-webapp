@@ -31,6 +31,13 @@ if (isset($_SESSION['user_id']) && isset($pdo)) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Custom Custom stylesheet -->
     <link href="<?php echo $path_to_root; ?>assets/css/style.css" rel="stylesheet">
+    <!-- Theme Manager Init -->
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
 </head>
 <body>
 
@@ -57,6 +64,11 @@ if (isset($_SESSION['user_id']) && isset($pdo)) {
 
             <!-- Right Navigation Controls -->
             <div class="d-flex align-items-center">
+                <!-- Theme Switcher Toggle -->
+                <button class="btn btn-sm btn-outline-secondary border-0 me-3" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Light/Dark Mode" type="button">
+                    <i id="themeToggleIcon" class="bi bi-sun-fill" style="font-size: 1.15rem;"></i>
+                </button>
+                
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <!-- Logged-in Customer Navbar -->
                     <span class="text-secondary me-3 d-none d-md-inline">
@@ -90,6 +102,34 @@ if (isset($_SESSION['user_id']) && isset($pdo)) {
         </div>
     </div>
 </nav>
+
+<script>
+function toggleTheme() {
+    const html = document.documentElement;
+    const currentTheme = html.getAttribute('data-theme') || 'dark';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon(newTheme);
+}
+
+function updateThemeIcon(theme) {
+    const icon = document.getElementById('themeToggleIcon');
+    if (icon) {
+        if (theme === 'light') {
+            icon.className = 'bi bi-moon-stars-fill';
+        } else {
+            icon.className = 'bi bi-sun-fill';
+        }
+    }
+}
+
+// Initial icon sync on load
+document.addEventListener('DOMContentLoaded', () => {
+    const theme = localStorage.getItem('theme') || 'dark';
+    updateThemeIcon(theme);
+});
+</script>
 
 <!-- Page Content Starts Here -->
 <div class="container py-5 flex-grow-1 animate-fade-in">
