@@ -76,7 +76,7 @@ $category_filter = isset($_GET['category']) ? (int)$_GET['category'] : 0;
 $query = "SELECT p.*, c.name as category_name 
           FROM products p 
           LEFT JOIN categories c ON p.category_id = c.id 
-          WHERE p.status = 'available'";
+          WHERE 1=1";
 $params = [];
 
 if (!empty($search)) {
@@ -206,7 +206,13 @@ require_once 'includes/header.php';
                     
                     <div class="product-card-body d-flex flex-column">
                         <span class="small mb-2 fw-semibold">
-                            <?php echo $prod['stock'] > 0 ? '<span class="text-success"><i class="bi bi-check2-circle me-1"></i>In Stock</span>' : '<span class="text-danger"><i class="bi bi-x-circle me-1"></i>Out of Stock</span>'; ?>
+                            <?php 
+                            if ($prod['status'] === 'unavailable') {
+                                echo '<span class="text-danger"><i class="bi bi-x-circle me-1"></i>Out of Stock</span>';
+                            } else {
+                                echo $prod['stock'] > 0 ? '<span class="text-success"><i class="bi bi-check2-circle me-1"></i>In Stock</span>' : '<span class="text-danger"><i class="bi bi-x-circle me-1"></i>Out of Stock</span>';
+                            }
+                            ?>
                         </span>
                         <h5 class="product-card-title">
                             <a href="product.php?id=<?php echo $prod['id']; ?>">
@@ -218,7 +224,9 @@ require_once 'includes/header.php';
                         <div class="mt-auto d-flex justify-content-between align-items-center pt-2 border-top">
                             <span class="product-card-price">$<?php echo number_format($prod['price'], 2); ?></span>
                             
-                            <?php if ($prod['stock'] > 0): ?>
+                            <?php if ($prod['status'] === 'unavailable'): ?>
+                                <button class="btn btn-sm btn-secondary disabled" disabled>Sold Out</button>
+                            <?php elseif ($prod['stock'] > 0): ?>
                                 <form action="index.php<?php echo !empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : ''; ?>" method="POST" class="d-inline">
                                     <input type="hidden" name="product_id" value="<?php echo $prod['id']; ?>">
                                     <input type="hidden" name="quantity" value="1">

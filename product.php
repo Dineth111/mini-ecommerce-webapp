@@ -139,7 +139,7 @@ require_once 'includes/header.php';
                 <span class="fw-semibold text-secondary">Availability:</span>
                 <?php if ($product['status'] === 'unavailable'): ?>
                     <span class="badge bg-danger-subtle text-danger px-3 py-2 rounded-pill fw-semibold">
-                        <i class="bi bi-eye-slash me-1"></i> Product Unavailable
+                        <i class="bi bi-x-circle me-1"></i> Out of Stock
                     </span>
                 <?php elseif ($product['stock'] > 0): ?>
                     <span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill fw-semibold">
@@ -154,7 +154,7 @@ require_once 'includes/header.php';
 
             <?php if ($product['status'] === 'unavailable'): ?>
                 <button class="btn btn-secondary btn-lg disabled w-50" disabled>
-                    <i class="bi bi-eye-slash-fill me-2"></i> Currently Unavailable
+                    <i class="bi bi-exclamation-octagon me-2"></i> Sold Out
                 </button>
             <?php elseif ($product['stock'] > 0): ?>
                 <form action="product.php?id=<?php echo $product['id']; ?>" method="POST" class="row g-3 align-items-center">
