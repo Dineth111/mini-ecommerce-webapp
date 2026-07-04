@@ -30,7 +30,7 @@ if (!isset($_SESSION['admin_id']) && basename($_SERVER['PHP_SELF']) !== 'login.p
     <!-- Custom CSS -->
     <link href="<?php echo $path_to_root; ?>assets/css/style.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+<body>
 
 <?php if (isset($_SESSION['admin_id'])): ?>
 <!-- Logged-in Admin Layout (Sidebar & Main content grid) -->

@@ -108,14 +108,14 @@ require_once 'includes/header.php';
 <!-- Hero Banner Section -->
 <div class="hero-section text-center text-md-start">
     <div class="row align-items-center">
-        <div class="col-md-7">
-            <span class="badge bg-indigo-subtle text-primary mb-3 px-3 py-2 rounded-pill fw-semibold">New Arrivals In Store</span>
+        <div class="col-md-7 hero-content">
+            <span class="badge border border-indigo-subtle text-indigo mb-3 px-3 py-2 rounded-pill fw-bold">New Arrivals In Store</span>
             <h1 class="hero-title mb-3">Elevate Your Everyday Essentials</h1>
             <p class="lead text-secondary mb-4">Discover curated luxury items, premium design aesthetics, and fast shipping with LuxeCommerce.</p>
-            <a href="#shop-section" class="btn btn-premium btn-lg">Explore Catalog</a>
+            <a href="#shop-section" class="btn btn-premium">Explore Catalog</a>
         </div>
         <div class="col-md-5 d-none d-md-block text-center">
-            <i class="bi bi-bag-heart text-primary opacity-25" style="font-size: 15rem;"></i>
+            <i class="bi bi-gem text-primary opacity-25" style="font-size: 13rem; filter: drop-shadow(0 0 40px rgba(99, 102, 241, 0.2));"></i>
         </div>
     </div>
 </div>
@@ -128,8 +128,8 @@ require_once 'includes/header.php';
                 <!-- Search bar -->
                 <div class="col-md-5">
                     <div class="input-group">
-                        <span class="input-group-text bg-light border-end-0 border-0"><i class="bi bi-search text-muted"></i></span>
-                        <input type="text" name="search" class="form-control form-control-custom border-0 bg-light" placeholder="Search premium products..." value="<?php echo sanitize($search); ?>">
+                        <span class="input-group-text bg-transparent border-0"><i class="bi bi-search text-muted"></i></span>
+                        <input type="text" name="search" class="form-control form-control-custom border-0" placeholder="Search premium products..." value="<?php echo sanitize($search); ?>">
                     </div>
                 </div>
 

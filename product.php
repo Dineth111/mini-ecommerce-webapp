@@ -123,14 +123,14 @@ require_once 'includes/header.php';
 
         <!-- Product Specs & Purchase controls -->
         <div class="col-md-6 d-flex flex-column justify-content-center">
-            <span class="badge bg-indigo-subtle text-primary align-self-start mb-3 px-3 py-2 rounded-pill fw-bold">
+            <span class="badge border border-indigo-subtle text-indigo align-self-start mb-3 px-3 py-2 rounded-pill fw-bold">
                 <?php echo sanitize($product['category_name'] ?? 'Uncategorized'); ?>
             </span>
-            <h1 class="fw-extrabold mb-3 text-dark"><?php echo sanitize($product['name']); ?></h1>
+            <h1 class="fw-extrabold mb-3 text-white"><?php echo sanitize($product['name']); ?></h1>
             
             <h2 class="text-primary fw-extrabold mb-4 fs-1">$<?php echo number_format($product['price'], 2); ?></h2>
             
-            <hr class="my-4 border-light">
+            <hr class="my-4 opacity-10">
 
             <h5 class="fw-bold mb-2"><i class="bi bi-file-text me-2"></i>Product Details</h5>
             <p class="text-secondary mb-4 leading-relaxed"><?php echo nl2br(sanitize($product['description'])); ?></p>
