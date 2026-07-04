@@ -45,8 +45,8 @@ if (isset($_SESSION['user_id']) && isset($pdo)) {
 <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
     <div class="container">
         <!-- Brand Logo -->
-        <a class="navbar-brand navbar-brand-logo" href="<?php echo $path_to_root; ?>index.php">
-            <i class="bi bi-gem me-2"></i>LuxeCommerce
+        <a class="navbar-brand navbar-brand-logo d-flex align-items-center" href="<?php echo $path_to_root; ?>index.php">
+            <i class="bi bi-gem me-2 text-indigo"></i><span class="logo-text">LuxeCommerce</span>
         </a>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
