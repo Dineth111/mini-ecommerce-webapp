@@ -69,8 +69,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart_detail'])
         $_SESSION['cart_error'] = "Failed to add item: " . $e->getMessage();
     }
 
-    // Redirect to prevent double-post
-    header("Location: product.php?id=" . $product_id);
+    // Redirect to cart automatically after adding item
+    header("Location: cart.php");
     exit;
 }
 

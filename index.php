@@ -55,9 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         $_SESSION['cart_error'] = "Failed to add item to cart: " . $e->getMessage();
     }
 
-    // Redirect to preserve query filters and prevent double-post
-    $query_str = !empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '';
-    header("Location: index.php" . $query_str);
+    // Redirect to cart automatically after adding item
+    header("Location: cart.php");
     exit;
 }
 

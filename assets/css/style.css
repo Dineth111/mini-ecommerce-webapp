@@ -606,3 +606,12 @@ footer a:hover {
 .modal-header, .modal-footer {
     border-color: var(--border-color) !important;
 }
+
+/* Cart Item Image Sizing & Layout Safety */
+.cart-item-img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 0.75rem;
+    flex-shrink: 0;
+}
