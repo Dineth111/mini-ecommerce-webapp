@@ -1,9 +1,6 @@
 <?php
 require_once '../config/db.php';
 
-$page_title = "Manage Categories";
-require_once '../includes/admin_header.php';
-
 // 1. POST Actions handling: Add, Edit, Delete
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Add Category
@@ -54,6 +51,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: categories.php");
     exit;
 }
+
+// NOW include the admin header after redirects are processed
+$page_title = "Manage Categories";
+require_once '../includes/admin_header.php';
 
 // 2. GET Check for editing state
 $edit_category = null;

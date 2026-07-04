@@ -1,9 +1,6 @@
 <?php
 require_once '../config/db.php';
 
-$page_title = "Manage Products";
-require_once '../includes/admin_header.php';
-
 // Define the images directory path
 $upload_dir = '../assets/images/';
 if (!is_dir($upload_dir)) {
@@ -139,6 +136,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 }
+
+// NOW include the admin header after redirects are processed
+$page_title = "Manage Products";
+require_once '../includes/admin_header.php';
 
 // 2. Fetch active UI views state (Default list, Add form, Edit form)
 $action = isset($_GET['action']) ? $_GET['action'] : 'list';

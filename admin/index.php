@@ -1,9 +1,6 @@
 <?php
 require_once '../config/db.php';
 
-$page_title = "Orders Dashboard";
-require_once '../includes/admin_header.php';
-
 // 1. Handle Order Status Update POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
     $order_id = (int)$_POST['order_id'];
@@ -21,6 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
     header("Location: index.php");
     exit;
 }
+
+// NOW include the admin header after redirects are processed
+$page_title = "Orders Dashboard";
+require_once '../includes/admin_header.php';
 
 // 2. Fetch Dashboard Statistics
 try {
