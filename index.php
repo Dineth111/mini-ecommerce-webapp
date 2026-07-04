@@ -76,7 +76,7 @@ $category_filter = isset($_GET['category']) ? (int)$_GET['category'] : 0;
 $query = "SELECT p.*, c.name as category_name 
           FROM products p 
           LEFT JOIN categories c ON p.category_id = c.id 
-          WHERE 1=1";
+          WHERE p.status = 'available'";
 $params = [];
 
 if (!empty($search)) {

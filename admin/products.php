@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $price = (float)$_POST['price'];
         $stock = (int)$_POST['stock'];
         $category_id = (int)$_POST['category_id'] > 0 ? (int)$_POST['category_id'] : null;
+        $status = sanitize($_POST['status']) === 'unavailable' ? 'unavailable' : 'available';
         
         $image_name = null;
 
@@ -43,10 +44,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!isset($_SESSION['admin_error'])) {
             try {
                 $stmt = $pdo->prepare("
-                    INSERT INTO products (name, description, price, stock, category_id, image) 
-                    VALUES (?, ?, ?, ?, ?, ?)
+                    INSERT INTO products (name, description, price, stock, category_id, image, status) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
                 ");
-                $stmt->execute([$name, $description, $price, $stock, $category_id, $image_name]);
+                $stmt->execute([$name, $description, $price, $stock, $category_id, $image_name, $status]);
                 $_SESSION['admin_success'] = "Product '{$name}' created successfully.";
             } catch (PDOException $e) {
                 $_SESSION['admin_error'] = "Failed to create product: " . $e->getMessage();
@@ -65,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $price = (float)$_POST['price'];
         $stock = (int)$_POST['stock'];
         $category_id = (int)$_POST['category_id'] > 0 ? (int)$_POST['category_id'] : null;
+        $status = sanitize($_POST['status']) === 'unavailable' ? 'unavailable' : 'available';
         $existing_image = $_POST['existing_image'];
         
         $image_name = $existing_image;
@@ -96,10 +98,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
                 $stmt = $pdo->prepare("
                     UPDATE products 
-                    SET name = ?, description = ?, price = ?, stock = ?, category_id = ?, image = ? 
+                    SET name = ?, description = ?, price = ?, stock = ?, category_id = ?, image = ?, status = ? 
                     WHERE id = ?
                 ");
-                $stmt->execute([$name, $description, $price, $stock, $category_id, $image_name, $id]);
+                $stmt->execute([$name, $description, $price, $stock, $category_id, $image_name, $status, $id]);
                 $_SESSION['admin_success'] = "Product updated successfully.";
             } catch (PDOException $e) {
                 $_SESSION['admin_error'] = "Failed to update product: " . $e->getMessage();
@@ -203,13 +205,20 @@ try {
                         <?php endforeach; ?>
                     </select>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label for="price" class="form-label small fw-semibold text-secondary">Price (USD)</label>
                     <input type="number" name="price" id="price" class="form-control form-control-custom" step="0.01" min="0" placeholder="e.g. 99.99" required>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label for="stock" class="form-label small fw-semibold text-secondary">Quantity In Stock</label>
                     <input type="number" name="stock" id="stock" class="form-control form-control-custom" min="0" placeholder="e.g. 50" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="status" class="form-label small fw-semibold text-secondary">Availability Status</label>
+                    <select name="status" id="status" class="form-select form-control-custom">
+                        <option value="available" selected>Available</option>
+                        <option value="unavailable">Unavailable</option>
+                    </select>
                 </div>
                 <div class="col-12">
                     <label for="description" class="form-label small fw-semibold text-secondary">Product Description</label>
@@ -255,13 +264,20 @@ try {
                         <?php endforeach; ?>
                     </select>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label for="price" class="form-label small fw-semibold text-secondary">Price (USD)</label>
                     <input type="number" name="price" id="price" class="form-control form-control-custom" step="0.01" min="0" value="<?php echo $edit_product['price']; ?>" required>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label for="stock" class="form-label small fw-semibold text-secondary">Quantity In Stock</label>
                     <input type="number" name="stock" id="stock" class="form-control form-control-custom" min="0" value="<?php echo $edit_product['stock']; ?>" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="status" class="form-label small fw-semibold text-secondary">Availability Status</label>
+                    <select name="status" id="status" class="form-select form-control-custom">
+                        <option value="available" <?php echo ($edit_product['status'] === 'available') ? 'selected' : ''; ?>>Available</option>
+                        <option value="unavailable" <?php echo ($edit_product['status'] === 'unavailable') ? 'selected' : ''; ?>>Unavailable</option>
+                    </select>
                 </div>
                 <div class="col-12">
                     <label for="description" class="form-label small fw-semibold text-secondary">Product Description</label>
@@ -331,6 +347,7 @@ try {
                             <th scope="col">Category</th>
                             <th scope="col">Price</th>
                             <th scope="col" class="text-center">Stock</th>
+                            <th scope="col" class="text-center">Status</th>
                             <th scope="col" class="text-end pe-3">Actions</th>
                         </tr>
                     </thead>
@@ -359,7 +376,7 @@ try {
                                     </span>
                                 </td>
                                 <!-- Price -->
-                                <td class="fw-bold text-indigo">
+                                <td>
                                     $<?php echo number_format($prod['price'], 2); ?>
                                 </td>
                                 <!-- Stock levels -->
@@ -368,6 +385,14 @@ try {
                                         <span class="badge bg-success-subtle text-success px-2 py-1"><?php echo $prod['stock']; ?> available</span>
                                     <?php else: ?>
                                         <span class="badge bg-danger-subtle text-danger px-2 py-1">Sold out</span>
+                                    <?php endif; ?>
+                                </td>
+                                <!-- Status -->
+                                <td class="text-center">
+                                    <?php if ($prod['status'] === 'available'): ?>
+                                        <span class="badge bg-success-subtle text-success px-2 py-1"><i class="bi bi-eye-fill me-1"></i>Active</span>
+                                    <?php else: ?>
+                                        <span class="badge bg-danger-subtle text-danger px-2 py-1"><i class="bi bi-eye-slash-fill me-1"></i>Inactive</span>
                                     <?php endif; ?>
                                 </td>
                                 <!-- Action Buttons -->

@@ -137,7 +137,11 @@ require_once 'includes/header.php';
 
             <div class="mb-4 d-flex align-items-center gap-3">
                 <span class="fw-semibold text-secondary">Availability:</span>
-                <?php if ($product['stock'] > 0): ?>
+                <?php if ($product['status'] === 'unavailable'): ?>
+                    <span class="badge bg-danger-subtle text-danger px-3 py-2 rounded-pill fw-semibold">
+                        <i class="bi bi-eye-slash me-1"></i> Product Unavailable
+                    </span>
+                <?php elseif ($product['stock'] > 0): ?>
                     <span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill fw-semibold">
                         <i class="bi bi-check2-circle me-1"></i> <?php echo $product['stock']; ?> Units In Stock
                     </span>
@@ -148,7 +152,11 @@ require_once 'includes/header.php';
                 <?php endif; ?>
             </div>
 
-            <?php if ($product['stock'] > 0): ?>
+            <?php if ($product['status'] === 'unavailable'): ?>
+                <button class="btn btn-secondary btn-lg disabled w-50" disabled>
+                    <i class="bi bi-eye-slash-fill me-2"></i> Currently Unavailable
+                </button>
+            <?php elseif ($product['stock'] > 0): ?>
                 <form action="product.php?id=<?php echo $product['id']; ?>" method="POST" class="row g-3 align-items-center">
                     <div class="col-auto">
                         <label for="quantity" class="form-label mb-0 fw-semibold text-secondary">Qty:</label>
